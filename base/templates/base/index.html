@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Main Page</title>
+{% endblock title %}
+
+{% block content %}
+
+
+<h1>Homework_l60</h1>
+<h3>Фильмы: </h3>
+{% for movie in movies %}
+    <ul>
+        <li>
+            <strong>{{ movie.title }} ({{ movie.release_year }})</strong>. В главной роли: {{ movie.actor }} |
+            <a href="{% url 'delete-movie' movie.pk %}" class="btn btn-close" title="Удалить"></a>
+        </li>
+    </ul>
+{% endfor %}
+
+
+<div class="card w-50 shadow" style="cursor:default" data-tilt
+                 data-tilt-reverse="true"
+                 data-tilt-max="5"
+                 data-tilt-speed="700"
+                 data-tilt-perspective="2000">
+  <div class="card-header">
+    Добавить фильм (а еще поводи по мне мышкой)
+  </div>
+  <div class="card-body">
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="{% static 'base/js/vanilla-tilt.js' %}"></script>
+{% endblock content %}

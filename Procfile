@@ -1,0 +1,1 @@
+web: gunicorn h60_project.wsgi --log-file -
